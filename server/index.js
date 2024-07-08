@@ -8,6 +8,8 @@ import indexRoutes from "./routes/index.routes.js";
 import clienteRoutes from "./routes/clientes.routes.js";
 import empleadosRoutes from "./routes/empleados.routes.js";
 import proovedorRoutes from "./routes/proovedor.routes.js";
+import facturasRoutes from "./routes/facturas.routes.js";
+
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -20,6 +22,7 @@ app.use(indexRoutes);
 app.use(clienteRoutes);
 app.use(empleadosRoutes);
 app.use(proovedorRoutes);
+app.use(facturasRoutes);
 
 app.use(express.static(join(__dirname, '../client/dist')))
 

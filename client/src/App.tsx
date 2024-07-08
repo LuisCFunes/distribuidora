@@ -1,9 +1,14 @@
+import { Routes, Route } from "react-router-dom";
+import ClientesForm from "./pages/ClientesTable";
+import NotFound from "./pages/NotFound";
+
 function App() {
   return (
-    <h1 className="text-3xl text-red-500 font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <Routes>
+      <Route path="/" element={<ClientesForm />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
