@@ -1,13 +1,11 @@
-import { Routes, Route } from "react-router-dom";
-import ClientesForm from "./pages/ClientesTable";
-import NotFound from "./pages/NotFound";
+import AuthProvider from "./context/ContextToken";
+import Routes from "./pages/Routes";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<ClientesForm />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   );
 }
 

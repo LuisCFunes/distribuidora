@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getClientes, Cliente } from "../api/cliente.api";
+import BotonHome from "../BotonHome";
 
 function ClientesForm() {
   const [data, setData] = useState<Cliente[]>([]);
@@ -14,11 +15,12 @@ function ClientesForm() {
 
   return (
     <div className="overflow-x-auto">
+      <BotonHome />
       <h1 className="text-2xl font-bold text-center">Clientes</h1>
       <table className="table table-zebra w-[80%] mx-auto">
         <thead>
           <tr>
-            <th></th>
+            <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Telefono</th>
