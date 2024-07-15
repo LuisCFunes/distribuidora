@@ -1,0 +1,72 @@
+import { pool } from "../db.js";
+
+export const getBodegas = async (req, res) => {
+  try {
+    const [result] = await pool.query(
+      "SELECT * FROM bodega"
+    );
+    res.json(result);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const getBodega = async (req, res) => {
+  try {
+    const [result] = await pool.query("SELECT * FROM bodega WHERE ID_Bodega = ?", [
+      req.params.ID_Bodega,
+    ]);
+
+    if (result.length === 0)
+      return res.status(404).json({ message: "bodega not found" });
+
+    res.json(result[0]);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const createBodega = async (req, res) => {
+  try {
+    const { Nom_Bodega, Ubi_Bodega, Num_Bodega } = req.body;
+    const [result] = await pool.query(
+      "INSERT INTO bodega(Nom_Bodega, Ubi_Bodega, Num_Bodega) VALUES (?, ?)",
+      [Nom_Bodega, Ubi_Bodega, Num_Bodega]
+    );
+    res.json({
+      ID_Bodega: result.insertID_Bodega,
+      Nom_Bodega,
+      Ubi_Bodega,
+      Num_Bodega,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const updateBodega = async (req, res) => {
+  try {
+    const result = await pool.query("UPDATE bodega SET ? WHERE ID_Bodega = ?", [
+      req.body,
+      req.params.ID_Bodega,
+    ]);
+    res.json(result);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const deleteBodega = async (req, res) => {
+  try {
+    const [result] = await pool.query("DELETE FROM bodega WHERE ID_Bodega = ?", [
+      req.params.ID_Bodega,
+    ]);
+
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: "bodega not found" });
+
+    return res.sendStatus(204);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};

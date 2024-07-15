@@ -7,8 +7,9 @@ import { PORT } from "./config.js";
 import indexRoutes from "./routes/index.routes.js";
 import clienteRoutes from "./routes/clientes.routes.js";
 import empleadosRoutes from "./routes/empleados.routes.js";
-import proovedorRoutes from "./routes/proovedor.routes.js";
+import proovedoresRoutes from "./routes/proovedores.routes.js";
 import facturasRoutes from "./routes/facturas.routes.js";
+import bodegaRoutes from "./routes/bodegas.routes.js";
 import loginRoutes from "./routes/login.routes.js";
 
 const app = express();
@@ -21,8 +22,9 @@ app.use(express.json());
 app.use(indexRoutes);
 app.use(clienteRoutes);
 app.use(empleadosRoutes);
-app.use(proovedorRoutes);
+app.use(proovedoresRoutes);
 app.use(facturasRoutes);
+app.use(bodegaRoutes);
 app.use(loginRoutes)
 
 app.use(express.static(join(__dirname, "../client/dist")));

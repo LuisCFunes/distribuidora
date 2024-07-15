@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getFacturas, Factura } from "../api/factura.api";
-import BotonHome from "../BotonHome";
+import { getFacturas, Factura } from "../Facturas/factura.api";
+import BotonHome from "../../components/BotonHome";
 
 function FacturasTabla() {
   const [data, setData] = useState<Factura[]>([]);

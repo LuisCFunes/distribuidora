@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BotonHome: React.FC = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-4 mb-4">
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-4 rounded">
         <Link to="/">Regresar a Home</Link>
       </button>

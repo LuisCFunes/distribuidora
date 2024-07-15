@@ -1,11 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "../context/ContextToken";
-import ProtegerRutas from "../ProtegerRutas";
+import ProtegerRutas from "../components/ProtegerRutas";
 import Login from "./Login";
 import NotFound from "./NotFound";
 import Home from "./Home";
-import ClientesTable from "./ClientesTable";
-import FacturasTabla from "./FacturasTable";
+import ClientesTable from "./Clientes/ClientesTable";
+import FacturasTabla from "./Facturas/FacturasTable";
+import BodegaTable from "./Bodegas/BodegaTable";
+import EmpleadosTable from "./Empleados/EmpleadosTable";
+import ProovedoresTable from "./Proovedores/ProovedoresTable";
 
 function Routes() {
   const { token } = useAuth();
@@ -33,6 +36,18 @@ function Routes() {
         {
           path: "/facturas",
           element: <FacturasTabla />,
+        },
+        {
+          path: "/bodegas",
+          element: <BodegaTable />,
+        },
+        {
+          path: "/empleados",
+          element: <EmpleadosTable />,
+        },
+        {
+          path: "/proovedores",
+          element: <ProovedoresTable />,
         },
       ],
     },
