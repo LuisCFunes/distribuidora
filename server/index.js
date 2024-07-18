@@ -10,6 +10,8 @@ import empleadosRoutes from "./routes/empleados.routes.js";
 import proovedoresRoutes from "./routes/proovedores.routes.js";
 import facturasRoutes from "./routes/facturas.routes.js";
 import bodegaRoutes from "./routes/bodegas.routes.js";
+import ordenesRoutes from "./routes/ordenes.routes.js";
+import articulosRoutes from "./routes/articulos.routes.js";
 import loginRoutes from "./routes/login.routes.js";
 
 const app = express();
@@ -25,6 +27,8 @@ app.use(empleadosRoutes);
 app.use(proovedoresRoutes);
 app.use(facturasRoutes);
 app.use(bodegaRoutes);
+app.use(articulosRoutes);
+app.use(ordenesRoutes);
 app.use(loginRoutes)
 
 app.use(express.static(join(__dirname, "../client/dist")));

@@ -9,6 +9,8 @@ import FacturasTabla from "./Facturas/FacturasTable";
 import BodegaTable from "./Bodegas/BodegaTable";
 import EmpleadosTable from "./Empleados/EmpleadosTable";
 import ProovedoresTable from "./Proovedores/ProovedoresTable";
+import ArticulosTable from "./Articulos/ArticulosTable";
+import OrdenesTable from "./Ordenes/OrdenesTable";
 
 function Routes() {
   const { token } = useAuth();
@@ -48,6 +50,14 @@ function Routes() {
         {
           path: "/proovedores",
           element: <ProovedoresTable />,
+        },
+        {
+          path: "/articulos",
+          element: <ArticulosTable />,
+        },
+        {
+          path: "/ordenes",
+          element: <OrdenesTable />,
         },
       ],
     },

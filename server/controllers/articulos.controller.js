@@ -33,10 +33,11 @@ export const createArticulo = async (req, res) => {
       Marca_Articulo,
       ID_Factura,
       ID_Bodega,
+      Precio
     } = req.body;
     const [result] = await pool.query(
       "INSERT INTO Articulo(Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega) VALUES (?, ?)",
-      [Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega]
+      [Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega,Precio]
     );
     res.json({
       ID_Articulo: result.insertID_Articulo,
@@ -45,6 +46,7 @@ export const createArticulo = async (req, res) => {
       Marca_Articulo,
       ID_Factura,
       ID_Bodega,
+      Precio
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
