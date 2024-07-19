@@ -11,3 +11,8 @@ export const getClientes = async (): Promise<Cliente[]> => {
     const { data } = await axios.get<Cliente[]>("http://localhost:3000/clientes");
     return data;
 }
+
+export const createCliente = async (): Promise<Cliente[]> => {
+    const { data } = await axios.post<Cliente[]>("http://localhost:3000/clientes");
+    return data;
+}

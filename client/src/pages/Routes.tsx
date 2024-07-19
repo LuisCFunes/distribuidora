@@ -11,6 +11,9 @@ import EmpleadosTable from "./Empleados/EmpleadosTable";
 import ProovedoresTable from "./Proovedores/ProovedoresTable";
 import ArticulosTable from "./Articulos/ArticulosTable";
 import OrdenesTable from "./Ordenes/OrdenesTable";
+import ArituculosForm from "./Articulos/ArticulosForm";
+import BodegaForm from "./Bodegas/BodegaForm";
+import ClientesForm from "./Clientes/ClientesForm";
 
 function Routes() {
   const { token } = useAuth();
@@ -36,12 +39,20 @@ function Routes() {
           element: <ClientesTable />,
         },
         {
+          path: "/clientes/form",
+          element: <ClientesForm />,
+        },
+        {
           path: "/facturas",
           element: <FacturasTabla />,
         },
         {
           path: "/bodegas",
           element: <BodegaTable />,
+        },
+        {
+          path: "/bodegas/form",
+          element: <BodegaForm />,
         },
         {
           path: "/empleados",
@@ -54,6 +65,10 @@ function Routes() {
         {
           path: "/articulos",
           element: <ArticulosTable />,
+        },
+        {
+          path: "/articulos/form",
+          element: <ArituculosForm />,
         },
         {
           path: "/ordenes",

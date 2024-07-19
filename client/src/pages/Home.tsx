@@ -1,52 +1,27 @@
-import { Link } from "react-router-dom";
+import NavTables from "../components/NavTables";
+import NavForms from "../components/NavForms";
+import { useState } from "react";
 
 function Home() {
+  const [options, setOptions] = useState("");
   return (
-    <div className="container mx-auto mt-5 flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-4 text-center">Home</h1>
-      <div className="mt-8 w-[60vw] grid grid-cols-auto text-center gap-4 ">
-        <Link
-          to="/clientes"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    <div className="flex justify-center items-center h-screen">
+      <div className="container mx-auto flex flex-col items-center">
+        <h1 className="text-3xl font-bold mb-4 text-center">Home</h1>
+        <button
+          className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4"
+          onClick={() => setOptions("Ver Tablas")}
         >
-          Ver Clientes
-        </Link>
-        <Link
-          to="/facturas"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          Ver Tablas
+        </button>
+        <button
+          className="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded"
+          onClick={() => setOptions("Ingresar datos")}
         >
-          Ver Facturas
-        </Link>
-        <Link
-          to="/bodegas"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Ver Bodegas
-        </Link>
-        <Link
-          to="/empleados"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Ver Empleados
-        </Link>
-        <Link
-          to="/proovedores"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Ver Proovedores
-        </Link>
-        <Link
-          to="/ordenes"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Ver Ordenes
-        </Link>
-        <Link
-          to="/articulos"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Ver Articulos
-        </Link>
+          Ingresar datos
+        </button>
+        {options === "Ver Tablas" && <NavTables />}
+        {options === "Ingresar datos" && <NavForms />}
       </div>
     </div>
   );

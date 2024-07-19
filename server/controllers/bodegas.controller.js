@@ -2,9 +2,7 @@ import { pool } from "../db.js";
 
 export const getBodegas = async (req, res) => {
   try {
-    const [result] = await pool.query(
-      "SELECT * FROM bodega"
-    );
+    const [result] = await pool.query("SELECT * FROM bodega");
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -13,9 +11,10 @@ export const getBodegas = async (req, res) => {
 
 export const getBodega = async (req, res) => {
   try {
-    const [result] = await pool.query("SELECT * FROM bodega WHERE ID_Bodega = ?", [
-      req.params.ID_Bodega,
-    ]);
+    const [result] = await pool.query(
+      "SELECT * FROM bodega WHERE ID_Bodega = ?",
+      [req.params.ID_Bodega]
+    );
 
     if (result.length === 0)
       return res.status(404).json({ message: "bodega not found" });
@@ -28,14 +27,13 @@ export const getBodega = async (req, res) => {
 
 export const createBodega = async (req, res) => {
   try {
-    const { Nom_Bodega, Ubi_Bodega, Num_Bodega } = req.body;
+    const { Ubi_Bodega, Num_Bodega } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO bodega(Nom_Bodega, Ubi_Bodega, Num_Bodega) VALUES (?, ?)",
-      [Nom_Bodega, Ubi_Bodega, Num_Bodega]
+      "INSERT INTO bodega( Ubi_Bodega, Num_Bodega) VALUES (?, ?)",
+      [Ubi_Bodega, Num_Bodega]
     );
     res.json({
       ID_Bodega: result.insertID_Bodega,
-      Nom_Bodega,
       Ubi_Bodega,
       Num_Bodega,
     });
@@ -58,9 +56,10 @@ export const updateBodega = async (req, res) => {
 
 export const deleteBodega = async (req, res) => {
   try {
-    const [result] = await pool.query("DELETE FROM bodega WHERE ID_Bodega = ?", [
-      req.params.ID_Bodega,
-    ]);
+    const [result] = await pool.query(
+      "DELETE FROM bodega WHERE ID_Bodega = ?",
+      [req.params.ID_Bodega]
+    );
 
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "bodega not found" });

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getClientes, Cliente } from "../Clientes/cliente.api";
 import Table from "../../components/Table";
 
-function ClientesForm() {
+function ClientesTable() {
   const [data, setData] = useState<Cliente[]>([]);
 
   useEffect(() => {
@@ -23,4 +23,4 @@ function ClientesForm() {
   return <Table data={data} columns={columns} title="Clientes" />;
 }
 
-export default ClientesForm;
+export default ClientesTable;
