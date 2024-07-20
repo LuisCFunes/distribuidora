@@ -30,7 +30,7 @@ export const createEmpleado = async (req, res) => {
   try {
     const {Nom_Empleado , Ape_Empleado , Tel_Empleado } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO empleado(Nom_Empleado, Ape_Empleado, Tel_Empleado) VALUES (?, ?)",
+      "INSERT INTO empleado(Nom_Empleado, Ape_Empleado, Tel_Empleado) VALUES (?, ?, ?)",
       [Nom_Empleado , Ape_Empleado , Tel_Empleado]
     );
     res.json({

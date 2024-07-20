@@ -30,7 +30,7 @@ export const createFactura = async (req, res) => {
   try {
     const { Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO factura(Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado) VALUES (?, ?)",
+      "INSERT INTO factura(Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado) VALUES (?, ?, ?, ?, ?)",
       [Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado]
     );
     res.json({

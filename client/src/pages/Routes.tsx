@@ -14,6 +14,10 @@ import OrdenesTable from "./Ordenes/OrdenesTable";
 import ArituculosForm from "./Articulos/ArticulosForm";
 import BodegaForm from "./Bodegas/BodegaForm";
 import ClientesForm from "./Clientes/ClientesForm";
+import EmpleadosForm from "./Empleados/EmpleadosForm";
+import FacturasForm from "./Facturas/FacturasForm";
+import OrdenesForm from "./Ordenes/OrdenesForm";
+import ProovedoresForm from "./Proovedores/ProovedoresForm";
 
 function Routes() {
   const { token } = useAuth();
@@ -47,6 +51,10 @@ function Routes() {
           element: <FacturasTabla />,
         },
         {
+          path: "/facturas/form",
+          element: <FacturasForm />,
+        },
+        {
           path: "/bodegas",
           element: <BodegaTable />,
         },
@@ -59,8 +67,16 @@ function Routes() {
           element: <EmpleadosTable />,
         },
         {
+          path: "/empleados/form",
+          element: <EmpleadosForm />,
+        },
+        {
           path: "/proovedores",
           element: <ProovedoresTable />,
+        },
+        {
+          path: "/proovedores/form",
+          element: <ProovedoresForm />,
         },
         {
           path: "/articulos",
@@ -73,6 +89,10 @@ function Routes() {
         {
           path: "/ordenes",
           element: <OrdenesTable />,
+        },
+        {
+          path: "/ordenes/form",
+          element: <OrdenesForm />,
         },
       ],
     },

@@ -10,10 +10,10 @@ function NavForms() {
         Ingresar Clientes
       </Link>
       <Link
-        to="/facturas"
+        to="/facturas/form"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Ver Facturas
+        Ingresar Facturas
       </Link>
       <Link
         to="/bodegas/form"
@@ -22,22 +22,22 @@ function NavForms() {
         Ingresar Bodegas
       </Link>
       <Link
-        to="/empleados"
+        to="/empleados/form"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Ver Empleados
+        Ingresar Empleados
       </Link>
       <Link
-        to="/proovedores"
+        to="/proovedores/form"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Ver Proovedores
+        Ingresar Proovedores
       </Link>
       <Link
-        to="/ordenes"
+        to="/ordenes/form"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Ver Ordenes
+        Ingresar Ordenes
       </Link>
       <Link
         to="/articulos/form"
