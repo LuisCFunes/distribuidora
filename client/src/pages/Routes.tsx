@@ -18,16 +18,10 @@ import EmpleadosForm from "./Empleados/EmpleadosForm";
 import FacturasForm from "./Facturas/FacturasForm";
 import OrdenesForm from "./Ordenes/OrdenesForm";
 import ProovedoresForm from "./Proovedores/ProovedoresForm";
+import HomeCajero from "./HomeCajero";
 
 function Routes() {
   const { token } = useAuth();
-
-  const routesForPublic = [
-    {
-      path: "*",
-      element: <NotFound />,
-    },
-  ];
 
   const routesForAuthenticatedOnly = [
     {
@@ -37,6 +31,10 @@ function Routes() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/cajero",
+          element: <HomeCajero />,
         },
         {
           path: "/clientes",
@@ -107,7 +105,6 @@ function Routes() {
   ];
 
   const router = createBrowserRouter([
-    ...routesForPublic,
     ...(!token ? routesForNotAuthenticatedOnly : []),
     ...routesForAuthenticatedOnly,
   ]);

@@ -18,7 +18,11 @@ export default function useLoginUser() {
         if (response.data.auth) {
           setToken(response.data.token);
           alert("Sesion iniciada como " + formData.user);
-          navigate("/", { replace: true });
+          if (formData.user === "admin") {
+            navigate("/", { replace: true });
+          } else {
+            navigate("/cajero", { replace: true });
+          }
         }
       })
       .catch((error) => {
