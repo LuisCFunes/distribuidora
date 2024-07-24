@@ -1,17 +1,48 @@
 import { useEffect, useState } from "react";
-import { getBodegas, Bodega } from "./bodega.api";
+import { getBodegas, Bodega, editBodega, deleteBodega } from "./bodega.api";
 import Table from "../../components/Table";
 
 function BodegaTable() {
   const [data, setData] = useState<Bodega[]>([]);
 
+  async function fetchData() {
+    const result = await getBodegas();
+    setData(result);
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const result = await getBodegas();
-      setData(result);
-    }
     fetchData();
   }, []);
+
+  const handleEdit = async (item: Bodega) => {
+    try {
+      const update = await editBodega(item.ID_Bodega, item);
+      setData((prevData) =>
+        prevData.map((x) =>
+          x.ID_Bodega === update.ID_Bodega
+            ? update
+            : x
+        )
+      );
+      fetchData();
+    } catch (error) {
+      console.error("Error al actualizar la bodega:", error);
+    }
+  };
+
+  const handleDelete = async (item: Bodega) => {
+    try {
+      const deleteItem = await deleteBodega(item.ID_Bodega);
+      setData((prevData) =>
+        prevData.map((x) =>
+          x.ID_Bodega === deleteItem.ID_Bodega ? deleteItem : x
+        )
+      );
+      fetchData();
+    } catch (error) {
+      console.error("Error al actualizar la bodega:", error);
+    }
+  };
 
   const columns = [
     { key: "ID_Bodega", label: "ID" },
@@ -19,7 +50,7 @@ function BodegaTable() {
     { key: "Num_Bodega", label: "Numero" },
   ];
 
-  return <Table data={data} columns={columns} title="Bodegas" />;
+  return <Table data={data} columns={columns} title="Bodegas" onEdit={handleEdit} onDelete={handleDelete} />;
 }
 
 export default BodegaTable;

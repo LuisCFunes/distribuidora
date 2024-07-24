@@ -62,7 +62,6 @@ export const updateCliente = async (req, res) => {
       message: "Cliente actualizado exitosamente",
       data: { ID_Cliente, nom_cliente, ape_cliente, tel_cliente }
     });
-    res.json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -70,14 +69,12 @@ export const updateCliente = async (req, res) => {
 
 export const deleteCliente = async (req, res) => {
   try {
-    const { ID_Cliente } = req.params;
-    const [result] = await pool.query(
-      "DELETE FROM Articulo WHERE ID_Cliente = ?",
-      [ID_Cliente]
-    );
+    const [result] = await pool.query("DELETE FROM cliente WHERE ID_Cliente = ?", [
+      req.params.ID_Cliente,
+    ]);
 
     if (result.affectedRows === 0)
-      return res.status(404).json({ message: "Cliente not found" });
+      return res.status(404).json({ message: "cliente not found" });
 
     return res.sendStatus(204);
   } catch (error) {

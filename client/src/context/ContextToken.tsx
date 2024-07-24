@@ -21,9 +21,16 @@ type AuthProviderProps = {
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      return token;
+    const expirationTime = localStorage.getItem("tokenExpiration");
+
+    if (token && expirationTime) {
+      if (Date.now() < Number(expirationTime)) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        return token;
+      } else {
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiration");
+      }
     }
     return null;
   });
@@ -31,10 +38,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const expirationTime = Date.now() + 60 * 60 * 1000; // 1 hora en milisegundos
       localStorage.setItem("token", token);
+      localStorage.setItem("tokenExpiration", expirationTime.toString());
     } else {
       delete axios.defaults.headers.common["Authorization"];
       localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiration");
     }
   }, [token]);
 

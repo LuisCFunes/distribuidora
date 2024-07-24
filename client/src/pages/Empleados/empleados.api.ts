@@ -26,3 +26,21 @@ export const createEmpleados = async (data: Empleados) => {
       console.error(error);
     });
 };
+
+export const editEmpleado = async (
+  id: number,
+  updatedData: Partial<Empleados>
+): Promise<Empleados> => {
+  const { data } = await axios.put<Empleados>(
+    `http://localhost:3000/empleados/${id}`,
+    updatedData
+  );
+  return data;
+};
+
+export const deleteEmpleado = async (id: number): Promise<Empleados> => {
+  const { data } = await axios.delete<Empleados>(
+    `http://localhost:3000/empleados/${id}`
+  );
+  return data;
+};

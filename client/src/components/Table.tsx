@@ -15,17 +15,17 @@ interface TableProps {
 }
 
 function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
-  const [editingItem, setEditingItem] = useState<number | null>(null);
+  const [editingItemId, setEditingItemId] = useState<string | null>(null);
   const [editedData, setEditedData] = useState<any>({});
 
-  const handleEdit = (item: number) => {
-    setEditingItem(item);
-    setEditedData(item);
+  const handleEdit = (item: any) => {
+    setEditingItemId(item.ID_Articulo || item.ID_Cliente);
+    setEditedData({ ...item });
   };
 
   const handleSave = () => {
     onEdit(editedData);
-    setEditingItem(null);
+    setEditingItemId(null);
   };
 
   const handleChange = (key: string, value: string) => {
@@ -49,11 +49,11 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
+          {data.map((item) => (
+            <tr key={item.ID_Articulo || item.ID_Cliente}>
               {columns.map((column) => (
                 <td key={column.key}>
-                  {editingItem === item ? (
+                  {editingItemId === (item.ID_Articulo || item.ID_Cliente) ? (
                     <input
                       className="w-full"
                       type="text"
@@ -66,7 +66,7 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
                 </td>
               ))}
               <td>
-                {editingItem === item ? (
+                {editingItemId === (item.ID_Articulo || item.ID_Cliente) ? (
                   <>
                     <button
                       className="px-4 py-2 bg-green-500 text-white rounded mr-2 w-full"
@@ -76,7 +76,7 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
                     </button>
                     <button
                       className="px-4 py-2 bg-red-500 text-white rounded w-full"
-                      onClick={() => setEditingItem(null)}
+                      onClick={() => setEditingItemId(null)}
                     >
                       Cancelar
                     </button>
