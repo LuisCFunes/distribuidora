@@ -55,11 +55,22 @@ export const createArticulo = async (req, res) => {
 
 export const updateArticulo = async (req, res) => {
   try {
+    const { ID_Articulo } = req.params;
+    const { Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega, Precio } = req.body; 
+
     const result = await pool.query(
-      "UPDATE Articulo SET ? WHERE ID_Articulo = ?",
-      [req.body, req.params.ID_Articulo]
+      "UPDATE Articulo SET Nom_Articulo = ?, Tipo_Articulo = ?, Marca_Articulo = ?, ID_Factura = ?, ID_Bodega = ?, Precio = ? WHERE ID_Articulo = ?",
+      [Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega, Precio, ID_Articulo]
     );
-    res.json(result);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Artículo no encontrado" });
+    }
+
+    res.json({
+      message: "Artículo actualizado exitosamente",
+      data: { ID_Articulo, Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega, Precio }
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -67,10 +78,9 @@ export const updateArticulo = async (req, res) => {
 
 export const deleteArticulo = async (req, res) => {
   try {
-    const [result] = await pool.query(
-      "DELETE FROM Articulo WHERE ID_Articulo = ?",
-      [req.params.ID_Articulo]
-    );
+    const [result] = await pool.query("DELETE FROM Articulo WHERE ID_Articulo = ?", [
+      req.params.ID_Articulo,
+    ]);
 
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "Articulo not found" });

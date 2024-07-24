@@ -45,11 +45,22 @@ export const createOrden = async (req, res) => {
 
 export const updateOrden = async (req, res) => {
   try {
-    const result = await pool.query("UPDATE ordenes SET ? WHERE ID_Orden = ?", [
-      req.body,
-      req.params.ID_Orden,
-    ]);
-    res.json(result);
+    const { ID_Orden } = req.params;
+    const { Fecha_Orden, ID_Proovedor } = req.body; 
+
+    const result = await pool.query(
+      "UPDATE ordenes SET Fecha_Orden = ?, ID_Proovedor = ? WHERE ID_Orden = ?",
+      [Fecha_Orden, ID_Proovedor, ID_Orden]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "orden no encontrado" });
+    }
+
+    res.json({
+      message: "orden actualizado exitosamente",
+      data: { ID_Orden, Fecha_Orden, ID_Proovedor }
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

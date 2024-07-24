@@ -44,11 +44,26 @@ export const createArticulo_Ordenes = async (req, res) => {
 
 export const updateArticulo_Ordenes = async (req, res) => {
   try {
+    const { ID_ArtOrdenes } = req.params;
+    const { ID_Articulo, ID_Orden } = req.body;
+
     const result = await pool.query(
-      "UPDATE Articulo_Ordenes SET ? WHERE ID_ArtOrdenes = ?",
-      [req.body, req.params.ID_ArtOrdenes]
+      "UPDATE Articulo_Ordenes SET ID_Articulo = ?, ID_Orden = ? WHERE ID_ArtOrdenes = ?",
+      [
+        ID_Articulo,
+        ID_Orden,
+        ID_ArtOrdenes,
+      ]
     );
-    res.json(result);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Artículo no encontrado" });
+    }
+
+    res.json({
+      message: "Artículo actualizado exitosamente",
+      data: { ID_ArtOrdenes, ID_Articulo, ID_Orden },
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

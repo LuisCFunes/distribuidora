@@ -11,12 +11,12 @@ const router = Router();
 
 router.get("/articulo_ordenes", getArtOrdenes);
 
-router.get("/articulo_ordenes/:id", getArticulo_Ordenes);
+router.get("/articulo_ordenes/:ID_ArtOrdenes", getArticulo_Ordenes);
 
 router.post("/articulo_ordenes", createArticulo_Ordenes);
 
-router.put("/articulo_ordenes/:id", updateArticulo_Ordenes);
+router.put("/articulo_ordenes/:ID_ArtOrdenes", updateArticulo_Ordenes);
 
-router.delete("/articulo_ordenes/:id", deleteArticulo_Ordenes);
+router.delete("/articulo_ordenes/:ID_ArtOrdenes", deleteArticulo_Ordenes);
 
 export default router;

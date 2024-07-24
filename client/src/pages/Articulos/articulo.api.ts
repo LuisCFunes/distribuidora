@@ -23,3 +23,21 @@ export const createArticulo = async (): Promise<Articulo[]> => {
   );
   return data;
 };
+
+export const editArticulo = async (
+  id: number,
+  updatedData: Partial<Articulo>
+): Promise<Articulo> => {
+  const { data } = await axios.put<Articulo>(
+    `http://localhost:3000/articulos/${id}`,
+    updatedData
+  );
+  return data;
+};
+
+export const deleteArticulo = async (id: number): Promise<Articulo> => {
+  const { data } = await axios.delete<Articulo>(
+    `http://localhost:3000/articulos/${id}`
+  );
+  return data;
+};

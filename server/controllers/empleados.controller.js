@@ -46,10 +46,12 @@ export const createEmpleado = async (req, res) => {
 
 export const updateEmpleado = async (req, res) => {
   try {
-    const result = await pool.query("UPDATE empleado SET ? WHERE ID_Empleado = ?", [
-      req.body,
-      req.params.ID_Empleado,
-    ]);
+    const { ID_Empleado } = req.params;
+    const { Nom_Empleado , Ape_Empleado , Tel_Empleado } = req.body;
+    const [result] = await pool.query(
+      "UPDATE empleado SET Nom_Empleado = ?, Ape_Empleado = ?, Tel_Empleado = ? WHERE ID_Empleado = ?",
+      [Nom_Empleado , Ape_Empleado , Tel_Empleado, ID_Empleado]
+    );
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });

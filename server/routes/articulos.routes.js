@@ -15,8 +15,8 @@ router.get("/articulos/:id", getArticulo);
 
 router.post("/articulos", createArticulo);
 
-router.put("/articulos/:id", updateArticulo);
+router.put("/articulos/:ID_Articulo", updateArticulo);
 
-router.delete("/articulos/:id", deleteArticulo);
+router.delete("/articulos/:ID_Articulo", deleteArticulo);
 
 export default router;

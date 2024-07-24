@@ -48,11 +48,21 @@ export const createFactura = async (req, res) => {
 
 export const updateFactura = async (req, res) => {
   try {
-    const result = await pool.query("UPDATE factura SET ? WHERE ID_Factura = ?", [
-      req.body,
-      req.params.ID_Factura,
-    ]);
-    res.json(result);
+    const { ID_Factura } = req.params;
+    const { Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado } = req.body; 
+cio
+    const result = await pool.query(
+      "UPDATE Articulo SET Subtotal = ?, Impuesto = ?, Total = ?, ID_Cliente = ?, ID_Empleado = ? WHERE ID_Factura = ?",
+      [Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado, ID_Factura]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Factura no encontrado" });
+    }
+
+    res.json({
+      message: "Factura actualizado exitosamente",
+      data: { ID_Factura, Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado }
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

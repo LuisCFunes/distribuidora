@@ -46,10 +46,22 @@ export const createCliente = async (req, res) => {
 
 export const updateCliente = async (req, res) => {
   try {
-    const result = await pool.query("UPDATE cliente SET ? WHERE ID_Cliente = ?", [
-      req.body,
-      req.params.ID_Cliente,
-    ]);
+    const { ID_Cliente } = req.params;
+    const { nom_cliente, ape_cliente, tel_cliente } = req.body; 
+
+    const result = await pool.query(
+      "UPDATE cliente SET nom_cliente = ?, ape_cliente = ?, tel_cliente = ? WHERE ID_Cliente = ?",
+      [nom_cliente, ape_cliente, tel_cliente, ID_Cliente]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Cliente no encontrado" });
+    }
+
+    res.json({
+      message: "Cliente actualizado exitosamente",
+      data: { ID_Cliente, nom_cliente, ape_cliente, tel_cliente }
+    });
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -58,9 +70,11 @@ export const updateCliente = async (req, res) => {
 
 export const deleteCliente = async (req, res) => {
   try {
-    const [result] = await pool.query("DELETE FROM cliente WHERE ID_Cliente = ?", [
-      req.params.ID_Cliente,
-    ]);
+    const { ID_Cliente } = req.params;
+    const [result] = await pool.query(
+      "DELETE FROM Articulo WHERE ID_Cliente = ?",
+      [ID_Cliente]
+    );
 
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "Cliente not found" });

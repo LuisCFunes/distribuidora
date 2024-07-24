@@ -11,12 +11,12 @@ const router = Router();
 
 router.get("/facturas", getFacturas);
 
-router.get("/facturas/:id", getFactura);
+router.get("/facturas/:ID_Factura", getFactura);
 
 router.post("/facturas", createFactura);
 
-router.put("/facturas/:id", updateFactura);
+router.put("/facturas/:ID_Factura", updateFactura);
 
-router.delete("/facturas/:id", deleteFactura);
+router.delete("/facturas/:ID_Factura", deleteFactura);
 
 export default router;

@@ -11,12 +11,12 @@ const router = Router();
 
 router.get("/bodegas", getBodegas);
 
-router.get("/bodegas/:id", getBodega);
+router.get("/bodegas/:ID_Bodega", getBodega);
 
 router.post("/bodegas", createBodega);
 
-router.put("/bodegas/:id", updateBodega);
+router.put("/bodegas/:ID_Bodega", updateBodega);
 
-router.delete("/bodegas/:id", deleteBodega);
+router.delete("/bodegas/:ID_Bodega", deleteBodega);
 
 export default router;

@@ -11,12 +11,12 @@ const router = Router();
 
 router.get("/proovedores", getProovedores);
 
-router.get("/proovedores/:id", getProovedor);
+router.get("/proovedores/:ID_Proovedor", getProovedor);
 
 router.post("/proovedores", createProovedor);
 
-router.put("/proovedores/:id", updateProovedor);
+router.put("/proovedores/:ID_Proovedor", updateProovedor);
 
-router.delete("/proovedores/:id", deleteProovedor);
+router.delete("/proovedores/:ID_Proovedor", deleteProovedor);
 
 export default router;

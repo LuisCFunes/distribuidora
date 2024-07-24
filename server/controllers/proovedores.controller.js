@@ -45,11 +45,19 @@ export const createProovedor = async (req, res) => {
 
 export const updateProovedor = async (req, res) => {
   try {
-    const result = await pool.query("UPDATE proovedor SET ? WHERE ID_Proovedor = ?", [
-      req.body,
-      req.params.ID_Proovedor,
-    ]);
-    res.json(result);
+    const { ID_Proovedor } = req.params;
+    const { Nom_Proovedor, Ubi_Proovedor } = req.body;
+    const [result] = await pool.query(
+      "UPDATE proovedor SET Nom_Proovedor = IFNULL(?, Nom_Proovedor), Ubi_Proovedor = IFNULL(?, Ubi_Proovedor) WHERE ID_Proovedor = ?",
+      [Nom_Proovedor, Ubi_Proovedor, ID_Proovedor]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Proovedor no encontrado" });
+    }
+    res.json({
+      message: "Proovedor actualizado exitosamente",
+      data: { ID_Proovedor, Nom_Proovedor, Ubi_Proovedor },
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

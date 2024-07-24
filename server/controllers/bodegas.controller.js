@@ -44,11 +44,16 @@ export const createBodega = async (req, res) => {
 
 export const updateBodega = async (req, res) => {
   try {
-    const result = await pool.query("UPDATE bodega SET ? WHERE ID_Bodega = ?", [
-      req.body,
-      req.params.ID_Bodega,
-    ]);
-    res.json(result);
+    const { ID_Bodega } = req.params;
+    const { Ubi_Bodega, Num_Bodega } = req.body;
+    const result = await pool.query(
+      "UPDATE bodega SET Ubi_Bodega = ?, Num_Bodega = ? WHERE ID_Bodega = ?",
+      [Ubi_Bodega, Num_Bodega, ID_Bodega]
+    );
+    res.json({
+      message: "Bodega actualizado exitosamente",
+      data: { ID_Bodega, Ubi_Bodega, Num_Bodega },
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -56,9 +61,10 @@ export const updateBodega = async (req, res) => {
 
 export const deleteBodega = async (req, res) => {
   try {
+    const { ID_Bodega } = req.params;
     const [result] = await pool.query(
-      "DELETE FROM bodega WHERE ID_Bodega = ?",
-      [req.params.ID_Bodega]
+      "DELETE FROM Articulo WHERE ID_Bodega = ?",
+      [ID_Bodega]
     );
 
     if (result.affectedRows === 0)
