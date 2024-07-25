@@ -8,7 +8,7 @@ import ClientesTable from "./Clientes/ClientesTable";
 import FacturasTabla from "./Facturas/FacturasTable";
 import BodegaTable from "./Bodegas/BodegaTable";
 import EmpleadosTable from "./Empleados/EmpleadosTable";
-import ProovedoresTable from "./Proovedores/ProovedoresTable";
+import ProveedoresTable from "./Proveedores/ProveedoresTable";
 import ArticulosTable from "./Articulos/ArticulosTable";
 import OrdenesTable from "./Ordenes/OrdenesTable";
 import ArituculosForm from "./Articulos/ArticulosForm";
@@ -17,7 +17,7 @@ import ClientesForm from "./Clientes/ClientesForm";
 import EmpleadosForm from "./Empleados/EmpleadosForm";
 import FacturasForm from "./Facturas/FacturasForm";
 import OrdenesForm from "./Ordenes/OrdenesForm";
-import ProovedoresForm from "./Proovedores/ProovedoresForm";
+import ProveedoresForm from "./Proveedores/ProveedoresForm";
 import HomeCajero from "./HomeCajero";
 
 function Routes() {
@@ -69,12 +69,12 @@ function Routes() {
           element: <EmpleadosForm />,
         },
         {
-          path: "/proovedores",
-          element: <ProovedoresTable />,
+          path: "/proveedores",
+          element: <ProveedoresTable />,
         },
         {
-          path: "/proovedores/form",
-          element: <ProovedoresForm />,
+          path: "/proveedores/form",
+          element: <ProveedoresForm />,
         },
         {
           path: "/articulos",

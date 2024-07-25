@@ -15,11 +15,11 @@ interface TableProps {
 }
 
 function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
-  const [editingItemId, setEditingItemId] = useState<string | null>(null);
+  const [editingItemId, setEditingItemId] = useState<number | null>(null);
   const [editedData, setEditedData] = useState<any>({});
 
   const handleEdit = (item: any) => {
-    setEditingItemId(item.ID_Articulo || item.ID_Cliente);
+    setEditingItemId(item.id);
     setEditedData({ ...item });
   };
 
@@ -50,10 +50,10 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={item.ID_Articulo || item.ID_Cliente}>
+            <tr key={item.id}>
               {columns.map((column) => (
                 <td key={column.key}>
-                  {editingItemId === (item.ID_Articulo || item.ID_Cliente) ? (
+                  {editingItemId === item.id ? (
                     <input
                       className="w-full"
                       type="text"
@@ -66,7 +66,7 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
                 </td>
               ))}
               <td>
-                {editingItemId === (item.ID_Articulo || item.ID_Cliente) ? (
+                {editingItemId === item.id ? (
                   <>
                     <button
                       className="px-4 py-2 bg-green-500 text-white rounded mr-2 w-full"

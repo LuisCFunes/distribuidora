@@ -24,7 +24,7 @@ function OrdenesTable() {
   const columns = [
     { key: "ID_Orden", label: "ID" },
     { key: "Fecha_Orden", label: "Fecha" },
-    { key: "ID_Proovedor", label: "Proovedor" },
+    { key: "ID_proveedor", label: "proveedor" },
   ];
 
   

@@ -46,10 +46,15 @@ export const updateBodega = async (req, res) => {
   try {
     const { ID_Bodega } = req.params;
     const { Ubi_Bodega, Num_Bodega } = req.body;
+    
     const result = await pool.query(
       "UPDATE bodega SET Ubi_Bodega = ?, Num_Bodega = ? WHERE ID_Bodega = ?",
       [Ubi_Bodega, Num_Bodega, ID_Bodega]
     );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "bodega no encontrado" });
+    }
     res.json({
       message: "Bodega actualizado exitosamente",
       data: { ID_Bodega, Ubi_Bodega, Num_Bodega },

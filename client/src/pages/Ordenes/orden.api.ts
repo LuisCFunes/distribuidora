@@ -3,7 +3,7 @@ import axios from "axios";
 export interface Ordenes {
   ID_Orden: number;
   Fecha_Orden: string;
-  ID_Proovedor: number;
+  ID_proveedor: number;
 }
 
 export const getOrdenes = async (): Promise<Ordenes[]> => {

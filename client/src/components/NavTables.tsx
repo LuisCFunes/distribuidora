@@ -28,10 +28,10 @@ function NavTables() {
         Ver Empleados
       </Link>
       <Link
-        to="/proovedores"
+        to="/proveedores"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Ver Proovedores
+        Ver proveedores
       </Link>
       <Link
         to="/ordenes"

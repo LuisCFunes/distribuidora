@@ -28,8 +28,8 @@ function OrdenesForm() {
         className="w-full p-4"
         required
         type="number"
-        placeholder="NO_Proovedor"
-        {...register("ID_Proovedor")}
+        placeholder="NO_proveedor"
+        {...register("ID_proveedor")}
       />
 
       <input
