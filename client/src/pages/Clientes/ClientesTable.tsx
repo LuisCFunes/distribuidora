@@ -8,7 +8,8 @@ function ClientesTable() {
   async function fetchData() {
     try {
       const result = await getClientes();
-      setData(result);
+      const formattedResult = result.map((item) => ({ ...item, id: item.ID_Cliente }));
+      setData(formattedResult);
     } catch (error) {
       console.error("Error al obtener los clientes:", error);
     }

@@ -19,6 +19,8 @@ import FacturasForm from "./Facturas/FacturasForm";
 import OrdenesForm from "./Ordenes/OrdenesForm";
 import ProveedoresForm from "./Proveedores/ProveedoresForm";
 import HomeCajero from "./HomeCajero";
+import Art_OrdenesTable from "./Art_Ordenes/Art_OrdenesTable";
+import Art_OrdenesForm from "./Art_Ordenes/Art_OrdenesForm";
 
 function Routes() {
   const { token } = useAuth();
@@ -91,6 +93,14 @@ function Routes() {
         {
           path: "/ordenes/form",
           element: <OrdenesForm />,
+        },
+        {
+          path: "/articulo_ordenes",
+          element: <Art_OrdenesTable />,
+        },
+        {
+          path: "/articulo_ordenes/form",
+          element: <Art_OrdenesForm />,
         },
       ],
     },

@@ -8,7 +8,8 @@ function FacturasTabla() {
   async function fetchData() {
     try {
       const result = await getFacturas();
-      setData(result);
+      const formattedResult = result.map((item) => ({ ...item, id: item.ID_Factura }));
+      setData(formattedResult);
     } catch (error) {
       console.error("Error al obtener las facturas:", error);
     }
@@ -55,6 +56,7 @@ function FacturasTabla() {
     { key: "Total", label: "Total" },
     { key: "ID_Cliente", label: "Cliente" },
     { key: "ID_Empleado", label: "Empleado" },
+    { key: "ID_Articulo", label: "Articulo" },
   ];
 
   return <Table data={data} columns={columns} title="Factura" onEdit={handleEdit} onDelete={handleDelete} />;

@@ -11,8 +11,13 @@ function EmpleadosTable() {
   const [data, setData] = useState<Empleados[]>([]);
 
   async function fetchData() {
-    const result = await getEmpleados();
-    setData(result);
+    try {
+      const result = await getEmpleados();
+      const formattedResult = result.map((item) => ({ ...item, id: item.ID_Empleado }));
+      setData(formattedResult);
+    } catch (error) {
+      console.error("Error al obtener los empleados:", error);
+    }
   }
 
   useEffect(() => {

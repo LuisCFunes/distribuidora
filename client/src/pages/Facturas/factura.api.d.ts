@@ -5,6 +5,7 @@ export interface Factura {
     total: number;
     cliente: number;
     empleado: number;
+    articulo: number;
 }
 
 export declare const getFacturas: () => Promise<Factura[]>;

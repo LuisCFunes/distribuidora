@@ -28,18 +28,16 @@ export const getFactura = async (req, res) => {
 
 export const createFactura = async (req, res) => {
   try {
-    const { Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado } = req.body;
+    const { ID_Cliente, ID_Empleado, ID_Articulo } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO factura(Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado) VALUES (?, ?, ?, ?, ?)",
-      [Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado]
+      "INSERT INTO factura(ID_Cliente, ID_Empleado, ID_Articulo) VALUES (?, ?, ?)",
+      [ID_Cliente, ID_Empleado, ID_Articulo]
     );
     res.json({
       ID_Factura: result.insertID_Factura,
-      Subtotal,
-      Impuesto,
-      Total,
       ID_Cliente,
       ID_Empleado, 
+      ID_Articulo
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -49,10 +47,10 @@ export const createFactura = async (req, res) => {
 export const updateFactura = async (req, res) => {
   try {
     const { ID_Factura } = req.params;
-    const { Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado } = req.body; 
+    const { ID_Cliente, ID_Empleado, ID_Articulo } = req.body; 
     const result = await pool.query(
-      "UPDATE factura SET Subtotal = ?, Impuesto = ?, Total = ?, ID_Cliente = ?, ID_Empleado = ? WHERE ID_Factura = ?",
-      [Subtotal, Impuesto, Total, ID_Cliente, ID_Empleado, ID_Factura]
+      "UPDATE factura SET ID_Cliente = ?, ID_Empleado = ?, ID_Articulo = ? WHERE ID_Factura = ?",
+      [ID_Cliente, ID_Empleado, ID_Articulo, ID_Factura]
     );
 
     if (result.affectedRows === 0) {

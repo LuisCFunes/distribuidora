@@ -13,9 +13,10 @@ function ArticulosTable() {
   async function fetchData() {
     try {
       const result = await getArticulos();
-      setData(result);
+      const formattedResult = result.map((item) => ({ ...item, id: item.ID_Articulo }));
+      setData(formattedResult);
     } catch (error) {
-      console.error("Error al obtener los artículos:", error);
+      console.error("Error al obtener los proveedores:", error);
     }
   }
 
@@ -55,7 +56,6 @@ function ArticulosTable() {
     { key: "Nom_Articulo", label: "Nombre" },
     { key: "Tipo_Articulo", label: "Tipo" },
     { key: "Marca_Articulo", label: "Marca" },
-    { key: "ID_Factura", label: "NO_Factura" },
     { key: "ID_Bodega", label: "NO_Bodega" },
     { key: "Precio", label: "Precio" },
   ];

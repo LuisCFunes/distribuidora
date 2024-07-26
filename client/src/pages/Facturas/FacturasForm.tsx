@@ -21,27 +21,6 @@ function FacturasForm() {
           className="w-full p-4"
           required
           type="number"
-          placeholder="Subtotal"
-          {...register("Subtotal")}
-        />
-        <input
-          className="w-full p-4"
-          required
-          type="number"
-          placeholder="Impuesto"
-          {...register("Impuesto")}
-        />
-        <input
-          className="w-full p-4"
-          required
-          type="number"
-          placeholder="Total"
-          {...register("Total")}
-        />
-        <input
-          className="w-full p-4"
-          required
-          type="number"
           placeholder="NO_Empleado"
           {...register("ID_Empleado")}
         />
@@ -51,6 +30,13 @@ function FacturasForm() {
           type="number"
           placeholder="NO_Cliente"
           {...register("ID_Cliente")}
+        />
+         <input
+          className="w-full p-4"
+          required
+          type="number"
+          placeholder="NO_Articulo"
+          {...register("ID_Articulo")}
         />
         <input
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

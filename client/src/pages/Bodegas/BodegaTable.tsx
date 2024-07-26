@@ -6,8 +6,13 @@ function BodegaTable() {
   const [data, setData] = useState<Bodega[]>([]);
 
   async function fetchData() {
-    const result = await getBodegas();
-    setData(result);
+    try {
+      const result = await getBodegas();
+      const formattedResult = result.map((item) => ({ ...item, id: item.ID_Bodega }));
+      setData(formattedResult);
+    } catch (error) {
+      console.error("Error al obtener las bodegas:", error);
+    }
   }
 
   useEffect(() => {

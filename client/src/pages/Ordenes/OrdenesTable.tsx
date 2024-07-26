@@ -8,49 +8,57 @@ function OrdenesTable() {
   const { formatDate } = useFormatearFecha();
 
   async function fetchData() {
-    const result = await getOrdenes();
-    const formattedData = result.map((orden) => ({
-      ...orden,
-      Fecha_Orden: formatDate(orden.Fecha_Orden),
-    }));
-    setData(formattedData);
+    try{
+      const result = await getOrdenes();
+      const formattedData = result.map((orden) => ({
+        ...orden,
+        Fecha_Orden: formatDate(orden.Fecha_Orden),
+      }));
+      const formattedResult = formattedData.map((item) => ({ ...item, id: item.ID_Orden }));
+      setData(formattedResult);
+    }
+    catch (error) {
+      console.error("Error al obtener las ordenes:", error);
+    }
+   
   }
 
   useEffect(() => {
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
   const columns = [
     { key: "ID_Orden", label: "ID" },
     { key: "Fecha_Orden", label: "Fecha" },
-    { key: "ID_proveedor", label: "proveedor" },
+    { key: "ID_Proveedor", label: "Proveedor" },
   ];
 
   
   const handleEdit = async (item: Ordenes) => {
     try {
       const update = await editOrdenes(item.ID_Orden, item);
+      const formattedUpdateProveedor = { ...update, id: update.ID_Orden };
       setData((prevData) =>
-        prevData.map((x) => (x.ID_Orden === update.ID_Orden ? update : x))
+        prevData.map((ordenes) =>
+          ordenes.ID_Orden === formattedUpdateProveedor.id
+            ? formattedUpdateProveedor
+            : ordenes
+        )
       );
       fetchData();
     } catch (error) {
-      console.error("Error al actualizar la bodega:", error);
+      console.error("Error al actualizar la orden:", error);
     }
   };
 
   const handleDelete = async (item: Ordenes) => {
     try {
-      const deleteItem = await deleteOrdenes(item.ID_Orden);
+      await deleteOrdenes(item.ID_Orden);
       setData((prevData) =>
-        prevData.map((x) =>
-          x.ID_Orden === deleteItem.ID_Orden ? deleteItem : x
-        )
+        prevData.filter((proveedor) => proveedor.ID_Orden !== item.ID_Orden)
       );
-      fetchData();
     } catch (error) {
-      console.error("Error al actualizar la bodega:", error);
+      console.error("Error al eliminar la orden:", error);
     }
   };
   return <Table data={data} columns={columns} title="Ordenes" onEdit={handleEdit} onDelete={handleDelete} />;

@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 
 export const getArticulos = async (req, res) => {
   try {
-    const [result] = await pool.query("SELECT * FROM Articulo");
+    const [result] = await pool.query("SELECT * FROM articulo_ordenes");
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -31,20 +31,18 @@ export const createArticulo = async (req, res) => {
       Nom_Articulo,
       Tipo_Articulo,
       Marca_Articulo,
-      ID_Factura,
       ID_Bodega,
       Precio
     } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO Articulo(Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega, Precio) VALUES (?, ?, ?, ?, ?, ?)",
-      [Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega,Precio]
+      "INSERT INTO Articulo(Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Bodega, Precio) VALUES (?, ?, ?, ?, ?, ?)",
+      [Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Bodega,Precio]
     );
     res.json({
       ID_Articulo: result.insertID_Articulo,
       Nom_Articulo,
       Tipo_Articulo,
       Marca_Articulo,
-      ID_Factura,
       ID_Bodega,
       Precio
     });
@@ -56,11 +54,11 @@ export const createArticulo = async (req, res) => {
 export const updateArticulo = async (req, res) => {
   try {
     const { ID_Articulo } = req.params;
-    const { Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega, Precio } = req.body; 
+    const { Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Bodega, Precio } = req.body; 
 
     const result = await pool.query(
-      "UPDATE Articulo SET Nom_Articulo = ?, Tipo_Articulo = ?, Marca_Articulo = ?, ID_Factura = ?, ID_Bodega = ?, Precio = ? WHERE ID_Articulo = ?",
-      [Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega, Precio, ID_Articulo]
+      "UPDATE Articulo SET Nom_Articulo = ?, Tipo_Articulo = ?, Marca_Articulo = ?, ID_Bodega = ?, Precio = ? WHERE ID_Articulo = ?",
+      [Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Bodega, Precio, ID_Articulo]
     );
 
     if (result.affectedRows === 0) {
@@ -69,7 +67,7 @@ export const updateArticulo = async (req, res) => {
 
     res.json({
       message: "Artículo actualizado exitosamente",
-      data: { ID_Articulo, Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Factura, ID_Bodega, Precio }
+      data: { ID_Articulo, Nom_Articulo, Tipo_Articulo, Marca_Articulo, ID_Bodega, Precio }
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });

@@ -28,16 +28,15 @@ export const getOrden = async (req, res) => {
 
 export const createOrden = async (req, res) => {
   try {
-    const { Fecha_Orden, ID_Proveedor, ID_Articulo } = req.body;
+    const { Fecha_Orden, ID_Proveedor } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO ordenes(Fecha_Orden, ID_Proveedor, ID_Articulo) VALUES (?, ?)",
+      "INSERT INTO ordenes(Fecha_Orden, ID_Proveedor) VALUES (?, ?)",
       [Fecha_Orden, ID_Proveedor, ID_Articulo]
     );
     res.json({
       ID_Orden: result.insertID_Orden,
       Fecha_Orden,
-      ID_Proveedor,
-      ID_Articulo
+      ID_Proveedor
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -47,11 +46,11 @@ export const createOrden = async (req, res) => {
 export const updateOrden = async (req, res) => {
   try {
     const { ID_Orden } = req.params;
-    const { Fecha_Orden, ID_Proveedor, ID_Articulo } = req.body; 
+    const { Fecha_Orden, ID_Proveedor } = req.body; 
 
     const result = await pool.query(
-      "UPDATE ordenes SET Fecha_Orden = ?, ID_Proveedor = ? ID_Articulo = ? WHERE ID_Orden = ?",
-      [Fecha_Orden, ID_Proveedor,ID_Articulo, ID_Orden]
+      "UPDATE ordenes SET Fecha_Orden = ?, ID_Proveedor = ?  WHERE ID_Orden = ?",
+      [Fecha_Orden, ID_Proveedor, ID_Orden]
     );
 
     if (result.affectedRows === 0) {
@@ -60,7 +59,7 @@ export const updateOrden = async (req, res) => {
 
     res.json({
       message: "orden actualizado exitosamente",
-      data: { ID_Orden, Fecha_Orden, ID_Proveedor, ID_Articulo },
+      data: { ID_Orden, Fecha_Orden, ID_Proveedor },
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });

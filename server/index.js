@@ -13,6 +13,7 @@ import bodegaRoutes from "./routes/bodegas.routes.js";
 import ordenesRoutes from "./routes/ordenes.routes.js";
 import articulosRoutes from "./routes/articulos.routes.js";
 import loginRoutes from "./routes/login.routes.js";
+import articulo_ordenesRoutes from "./routes/articulo_ordenes.routes.js";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -29,7 +30,8 @@ app.use(facturasRoutes);
 app.use(bodegaRoutes);
 app.use(articulosRoutes);
 app.use(ordenesRoutes);
-app.use(loginRoutes)
+app.use(loginRoutes);
+app.use(articulo_ordenesRoutes);
 
 app.use(express.static(join(__dirname, "../client/dist")));
 

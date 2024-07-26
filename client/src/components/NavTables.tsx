@@ -31,7 +31,7 @@ function NavTables() {
         to="/proveedores"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Ver proveedores
+        Ver Proveedores
       </Link>
       <Link
         to="/ordenes"
@@ -44,6 +44,12 @@ function NavTables() {
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Ver Articulos
+      </Link>
+      <Link
+        to="/articulo_ordenes"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Ver Ordenes con articulos
       </Link>
     </div>
   );

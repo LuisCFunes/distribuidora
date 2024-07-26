@@ -5,7 +5,7 @@ import {
     createArticulo_Ordenes,
     updateArticulo_Ordenes,
     deleteArticulo_Ordenes,
-} from "../controllers/articulo_ordenes.controller";
+} from "../controllers/articulo_ordenes.controller.js";
 
 const router = Router();
 

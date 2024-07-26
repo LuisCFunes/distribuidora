@@ -7,6 +7,7 @@ export interface Factura {
     Total: number;
     ID_Cliente: string;
     ID_Empleado: string;
+    ID_Articulo: number;
 }
 
 export const getFacturas = async (): Promise<Factura[]> => {
