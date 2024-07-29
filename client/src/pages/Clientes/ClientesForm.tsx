@@ -22,14 +22,14 @@ function ClientesForm() {
           required
           type="text"
           placeholder="Nombre del cliente"
-          {...register("nom_cliente")}
+          {...register("Nom_Cliente")}
         />
         <input
           className="w-full p-4"
           required
           type="text"
           placeholder="Apellido del cliente"
-          {...register("ape_cliente")}
+          {...register("Ape_Cliente")}
         />
         <input
           className="w-full p-4"
@@ -38,7 +38,7 @@ function ClientesForm() {
           maxLength={8}
           minLength={8}
           placeholder="Telefono del cliente sin guion"
-          {...register("tel_cliente")}
+          {...register("Tel_Cliente")}
         />
         <input
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

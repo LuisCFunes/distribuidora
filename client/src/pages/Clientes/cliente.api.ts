@@ -2,9 +2,9 @@ import axios from "axios";
 
 export interface Cliente {
   ID_Cliente: number;
-  nom_cliente: string;
-  ape_cliente: string;
-  tel_cliente: string;
+  Nom_Cliente: string;
+  Ape_Cliente: string;
+  Tel_Cliente: string;
 }
 
 export const getClientes = async (): Promise<Cliente[]> => {

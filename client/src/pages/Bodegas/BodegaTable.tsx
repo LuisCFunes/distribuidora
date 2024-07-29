@@ -37,22 +37,18 @@ function BodegaTable() {
 
   const handleDelete = async (item: Bodega) => {
     try {
-      const deleteItem = await deleteBodega(item.ID_Bodega);
-      setData((prevData) =>
-        prevData.map((x) =>
-          x.ID_Bodega === deleteItem.ID_Bodega ? deleteItem : x
-        )
-      );
+      const deletedItem = await deleteBodega(item.ID_Bodega);
+      setData((prevData) => prevData.filter((x) => x.ID_Bodega !== deletedItem.ID_Bodega));
       fetchData();
     } catch (error) {
-      console.error("Error al actualizar la bodega:", error);
+      console.error("Error al eliminar la bodega:", error);
     }
   };
 
   const columns = [
     { key: "ID_Bodega", label: "ID" },
+    { key: "Nom_Bodega", label: "Nombre" },
     { key: "Ubi_Bodega", label: "Ubicacion" },
-    { key: "Num_Bodega", label: "Numero" },
   ];
 
   return <Table data={data} columns={columns} title="Bodegas" onEdit={handleEdit} onDelete={handleDelete} />;

@@ -3,7 +3,7 @@ import axios from "axios";
 export interface Bodega {
   ID_Bodega: number;
   Ubi_Bodega: string;
-  Num_Bodega: number;
+  Nom_Bodega: string;
 }
 
 export const getBodegas = async (): Promise<Bodega[]> => {

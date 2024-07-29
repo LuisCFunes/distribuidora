@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
-import { proveedores } from "./proveedores.api";
+import { proveedores } from "./proovedores.api";
 import usePost from "../../hooks/usePost";
 import BotonHome from "../../components/BotonHome";
 
 function proveedoresForm() {
     const { register, handleSubmit, reset } = useForm<proveedores>();
     const { postData } = usePost();
-  
     const handleSubmitData = (data: proveedores) => {
       postData(data, "proveedores");
       reset();
@@ -22,14 +21,14 @@ function proveedoresForm() {
           required
           type="date"
           placeholder="Nombre del proveedor"
-          {...register("Nom_proveedor")}
+          {...register("Nom_Proveedor")}
         />
         <input
           className="w-full p-4"
           required
           type="number"
           placeholder="Ubicacion del proveedor"
-          {...register("Ubi_proveedor")}
+          {...register("Ubi_Proveedor")}
         />
   
         <input

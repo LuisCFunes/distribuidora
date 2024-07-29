@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { getClientes, Cliente, deleteCliente, editCliente } from "../Clientes/cliente.api";
+import {
+  getClientes,
+  Cliente,
+  deleteCliente,
+  editCliente,
+} from "../Clientes/cliente.api";
 import Table from "../../components/Table";
 
 function ClientesTable() {
@@ -8,7 +13,10 @@ function ClientesTable() {
   async function fetchData() {
     try {
       const result = await getClientes();
-      const formattedResult = result.map((item) => ({ ...item, id: item.ID_Cliente }));
+      const formattedResult = result.map((item) => ({
+        ...item,
+        id: item.ID_Cliente,
+      }));
       setData(formattedResult);
     } catch (error) {
       console.error("Error al obtener los clientes:", error);
@@ -37,10 +45,13 @@ function ClientesTable() {
 
   const handleDelete = async (item: Cliente) => {
     try {
-      await deleteCliente(item.ID_Cliente);
+      const deletedItem = await deleteCliente(item.ID_Cliente);
       setData((prevData) =>
-        prevData.filter((cliente) => cliente.ID_Cliente !== item.ID_Cliente)
+        prevData.filter(
+          (cliente) => cliente.ID_Cliente !== deletedItem.ID_Cliente
+        )
       );
+      fetchData();
     } catch (error) {
       console.error("Error al eliminar el cliente:", error);
     }
@@ -48,12 +59,20 @@ function ClientesTable() {
 
   const columns = [
     { key: "ID_Cliente", label: "ID" },
-    { key: "nom_cliente", label: "Nombre" },
-    { key: "ape_cliente", label: "Apellido" },
-    { key: "tel_cliente", label: "Telefono" },
+    { key: "Nom_Cliente", label: "Nombre" },
+    { key: "Ape_Cliente", label: "Apellido" },
+    { key: "Tel_Cliente", label: "Telefono" },
   ];
 
-  return <Table data={data} columns={columns} title="Clientes" onEdit={handleEdit} onDelete={handleDelete} />;
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      title="Clientes"
+      onEdit={handleEdit}
+      onDelete={handleDelete}
+    />
+  );
 }
 
 export default ClientesTable;
