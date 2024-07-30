@@ -27,9 +27,9 @@ function BodegaForm() {
       <input
         className="w-full p-4"
         required
-        type="number"
-        placeholder="Numero de bodega"
-        {...register("Num_Bodega")}
+        type="text"
+        placeholder="Nombre de bodega"
+        {...register("Nom_Bodega")}
       />
       <input
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

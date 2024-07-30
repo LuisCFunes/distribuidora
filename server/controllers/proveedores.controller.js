@@ -28,15 +28,15 @@ export const getproveedor = async (req, res) => {
 
 export const createproveedor = async (req, res) => {
   try {
-    const { nom_proveedor, ubi_proveedor } = req.body;
+    const { Nom_Proveedor, Ubi_Proveedor } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO proveedor(nom_proveedor, ubi_proveedor) VALUES (?, ?)",
-      [nom_proveedor, ubi_proveedor]
+      "INSERT INTO proveedor(Nom_Proveedor, Ubi_Proveedor) VALUES (?, ?)",
+      [Nom_Proveedor, Ubi_Proveedor]
     );
     res.json({
       ID_Proveedor: result.insertID_Proveedor,
-      nom_proveedor,
-      ubi_proveedor,
+      Nom_Proveedor,
+      Ubi_Proveedor,
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });

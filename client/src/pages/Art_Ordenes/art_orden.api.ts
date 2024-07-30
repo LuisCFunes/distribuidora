@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export interface ArtOrdenes {
-  ID_ArtOrdenes: number;
+  ID: number;
   ID_Orden: number;
   ID_Articulo: number;
 }

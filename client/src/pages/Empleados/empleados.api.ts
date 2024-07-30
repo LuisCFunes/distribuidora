@@ -4,7 +4,6 @@ export interface Empleados {
   ID_Empleado: number;
   Nom_Empleado: string;
   Ape_Empleado: string;
-  Tel_Empleado: string;
 }
 
 export const getEmpleados = async (): Promise<Empleados[]> => {

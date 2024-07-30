@@ -28,16 +28,15 @@ export const getEmpleado = async (req, res) => {
 
 export const createEmpleado = async (req, res) => {
   try {
-    const {Nom_Empleado , Ape_Empleado , Tel_Empleado } = req.body;
+    const {Nom_Empleado , Ape_Empleado  } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO empleado(Nom_Empleado, Ape_Empleado, Tel_Empleado) VALUES (?, ?, ?)",
-      [Nom_Empleado , Ape_Empleado , Tel_Empleado]
+      "INSERT INTO empleado(Nom_Empleado, Ape_Empleado) VALUES (?, ?)",
+      [Nom_Empleado , Ape_Empleado ]
     );
     res.json({
       ID_Empleado: result.insertNom_Empleado,
       Nom_Empleado,
-      Ape_Empleado,
-      Tel_Empleado
+      Ape_Empleado
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -47,10 +46,10 @@ export const createEmpleado = async (req, res) => {
 export const updateEmpleado = async (req, res) => {
   try {
     const { ID_Empleado } = req.params;
-    const { Nom_Empleado , Ape_Empleado , Tel_Empleado } = req.body;
+    const { Nom_Empleado , Ape_Empleado } = req.body;
     const [result] = await pool.query(
-      "UPDATE empleado SET Nom_Empleado = ?, Ape_Empleado = ?, Tel_Empleado = ? WHERE ID_Empleado = ?",
-      [Nom_Empleado , Ape_Empleado , Tel_Empleado, ID_Empleado]
+      "UPDATE empleado SET Nom_Empleado = ?, Ape_Empleado = ? WHERE ID_Empleado = ?",
+      [Nom_Empleado , Ape_Empleado , ID_Empleado]
     );
     res.json(result);
   } catch (error) {

@@ -3,7 +3,7 @@ import { pool } from "../db.js";
 export const getOrdenes = async (req, res) => {
   try {
     const [result] = await pool.query(
-      "SELECT * FROM ordenes"
+      "SELECT * FROM orden"
     );
     res.json(result);
   } catch (error) {
@@ -13,7 +13,7 @@ export const getOrdenes = async (req, res) => {
 
 export const getOrden = async (req, res) => {
   try {
-    const [result] = await pool.query("SELECT * FROM ordenes WHERE ID_Orden = ?", [
+    const [result] = await pool.query("SELECT * FROM orden WHERE ID_Orden = ?", [
       req.params.ID_Orden,
     ]);
 
@@ -30,8 +30,8 @@ export const createOrden = async (req, res) => {
   try {
     const { Fecha_Orden, ID_Proveedor } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO ordenes(Fecha_Orden, ID_Proveedor) VALUES (?, ?)",
-      [Fecha_Orden, ID_Proveedor, ID_Articulo]
+      "INSERT INTO orden(Fecha_Orden, ID_Proveedor) VALUES (?, ?)",
+      [Fecha_Orden, ID_Proveedor]
     );
     res.json({
       ID_Orden: result.insertID_Orden,
@@ -49,7 +49,7 @@ export const updateOrden = async (req, res) => {
     const { Fecha_Orden, ID_Proveedor } = req.body; 
 
     const result = await pool.query(
-      "UPDATE ordenes SET Fecha_Orden = ?, ID_Proveedor = ?  WHERE ID_Orden = ?",
+      "UPDATE orden SET Fecha_Orden = ?, ID_Proveedor = ?  WHERE ID_Orden = ?",
       [Fecha_Orden, ID_Proveedor, ID_Orden]
     );
 
@@ -68,7 +68,7 @@ export const updateOrden = async (req, res) => {
 
 export const deleteOrden = async (req, res) => {
   try {
-    const [result] = await pool.query("DELETE FROM ordenes WHERE ID_Orden = ?", [
+    const [result] = await pool.query("DELETE FROM orden WHERE ID_Orden = ?", [
       req.params.ID_Orden,
     ]);
 

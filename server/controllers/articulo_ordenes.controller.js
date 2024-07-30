@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 
 export const getArtOrdenes = async (req, res) => {
   try {
-    const [result] = await pool.query("SELECT * FROM articulo_ordenes");
+    const [result] = await pool.query("SELECT * FROM articulo_orden;");
     res.json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -12,12 +12,12 @@ export const getArtOrdenes = async (req, res) => {
 export const getArticulo_Ordenes = async (req, res) => {
   try {
     const [result] = await pool.query(
-      "SELECT * FROM articulo_ordenes WHERE ID_ArtOrdenes = ?",
-      [req.params.ID_Articulo_Ordenes]
+      "SELECT * FROM articulo_orden WHERE ID = ?",
+      [req.params.ID]
     );
 
     if (result.length === 0)
-      return res.status(404).json({ message: "articulo_ordenes not found" });
+      return res.status(404).json({ message: "articulo_orden not found" });
 
     res.json(result[0]);
   } catch (error) {
@@ -29,11 +29,11 @@ export const createArticulo_Ordenes = async (req, res) => {
   try {
     const { ID_Articulo, ID_Orden } = req.body;
     const [result] = await pool.query(
-      "INSERT INTO articulo_ordenes(ID_Articulo, ID_Orden) VALUES (?, ?)",
+      "INSERT INTO articulo_orden(ID_Articulo, ID_Orden) VALUES (?, ?)",
       [ID_Articulo, ID_Orden]
     );
     res.json({
-      ID_ArtOrdenes: result.insertID_ArtOrdenes,
+      ID: result.ID,
       ID_Articulo,
       ID_Orden,
     });
@@ -44,15 +44,15 @@ export const createArticulo_Ordenes = async (req, res) => {
 
 export const updateArticulo_Ordenes = async (req, res) => {
   try {
-    const { ID_ArtOrdenes } = req.params;
+    const { ID } = req.params;
     const { ID_Articulo, ID_Orden } = req.body;
 
     const result = await pool.query(
-      "UPDATE articulo_ordenes SET ID_Articulo = ?, ID_Orden = ? WHERE ID_ArtOrdenes = ?",
+      "UPDATE articulo_orden SET ID_Articulo = ?, ID_Orden = ? WHERE ID = ?",
       [
         ID_Articulo,
         ID_Orden,
-        ID_ArtOrdenes,
+        ID,
       ]
     );
 
@@ -61,8 +61,8 @@ export const updateArticulo_Ordenes = async (req, res) => {
     }
 
     res.json({
-      message: "articulo_ordenes actualizado exitosamente",
-      data: { ID_ArtOrdenes, ID_Articulo, ID_Orden },
+      message: "articulo_orden actualizado exitosamente",
+      data: { ID, ID_Articulo, ID_Orden },
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -72,12 +72,12 @@ export const updateArticulo_Ordenes = async (req, res) => {
 export const deleteArticulo_Ordenes = async (req, res) => {
   try {
     const [result] = await pool.query(
-      "DELETE FROM Articulo_Ordenes WHERE ID_ArtOrdenes = ?",
-      [req.params.ID_ArtOrdenes]
+      "DELETE FROM Articulo_Orden WHERE ID = ?",
+      [req.params.ID]
     );
 
     if (result.affectedRows === 0)
-      return res.status(404).json({ message: "Articulo_Ordenes not found" });
+      return res.status(404).json({ message: "articulo_orden not found" });
 
     return res.sendStatus(204);
   } catch (error) {

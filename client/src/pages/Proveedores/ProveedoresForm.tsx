@@ -3,7 +3,7 @@ import { proveedores } from "./proovedores.api";
 import usePost from "../../hooks/usePost";
 import BotonHome from "../../components/BotonHome";
 
-function proveedoresForm() {
+function ProveedoresForm() {
     const { register, handleSubmit, reset } = useForm<proveedores>();
     const { postData } = usePost();
     const handleSubmitData = (data: proveedores) => {
@@ -19,14 +19,14 @@ function proveedoresForm() {
         <input
           className="w-full p-4"
           required
-          type="date"
+          type="text"
           placeholder="Nombre del proveedor"
           {...register("Nom_Proveedor")}
         />
         <input
           className="w-full p-4"
           required
-          type="number"
+          type="text"
           placeholder="Ubicacion del proveedor"
           {...register("Ubi_Proveedor")}
         />
@@ -41,4 +41,4 @@ function proveedoresForm() {
     );
 }
 
-export default proveedoresForm
+export default ProveedoresForm

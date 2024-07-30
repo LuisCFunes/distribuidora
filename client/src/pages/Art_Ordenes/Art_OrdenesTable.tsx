@@ -8,7 +8,7 @@ function Art_OrdenesTable() {
   async function fetchData() {
     try{
       const result = await getArtOrdenes();
-      const formattedResult = result.map((item) => ({ ...item, id: item.ID_ArtOrdenes }));
+      const formattedResult = result.map((item) => ({ ...item, id: item.ID }));
       setData(formattedResult);
     }
     catch (error) {
@@ -22,7 +22,7 @@ function Art_OrdenesTable() {
   }, []);
   
   const columns = [
-    { key: "ID_ArtOrdenes", label: "ID" },
+    { key: "ID", label: "ID" },
     { key: "ID_Articulo", label: "Articulo" },
     { key: "ID_Orden", label: "Orden" },
   ];
@@ -30,11 +30,11 @@ function Art_OrdenesTable() {
   
   const handleEdit = async (item: ArtOrdenes) => {
     try {
-      const update = await editArtOrdenes(item.ID_ArtOrdenes, item);
-      const formattedUpdateProveedor = { ...update, id: update.ID_ArtOrdenes };
+      const update = await editArtOrdenes(item.ID, item);
+      const formattedUpdateProveedor = { ...update, id: update.ID };
       setData((prevData) =>
         prevData.map((ordenes) =>
-          ordenes.ID_ArtOrdenes === formattedUpdateProveedor.id
+          ordenes.ID === formattedUpdateProveedor.id
             ? formattedUpdateProveedor
             : ordenes
         )
@@ -47,9 +47,9 @@ function Art_OrdenesTable() {
 
   const handleDelete = async (item: ArtOrdenes) => {
     try {
-      await deleteArtOrdenes(item.ID_ArtOrdenes);
+      await deleteArtOrdenes(item.ID);
       setData((prevData) =>
-        prevData.filter((ordenes) => ordenes.ID_ArtOrdenes !== item.ID_ArtOrdenes)
+        prevData.filter((ordenes) => ordenes.ID !== item.ID)
       );
     } catch (error) {
       console.error("Error al eliminar la orden:", error);

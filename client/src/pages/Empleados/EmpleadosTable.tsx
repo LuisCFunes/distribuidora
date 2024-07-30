@@ -53,8 +53,8 @@ function EmpleadosTable() {
   const columns = [
     { key: "ID_Empleado", label: "ID" },
     { key: "Nom_Empleado", label: "Nombre" },
-    { key: "Ape_Empleado", label: "Apellido" },
-    { key: "Tel_Empleado", label: "Telefono" },
+    { key: "Ape_Empleado", label: "Apellido" }
+
   ];
 
   return <Table data={data} columns={columns} title="Empleados" onEdit={handleEdit} onDelete={handleDelete} />;
