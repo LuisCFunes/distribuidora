@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import useLoginUser from "../hooks/useLoginUser";
 import { useState } from "react";
+import logoadmin from "../../public/administrator-vectormaker-co.svg";
+import logocajero from "../../public/clerk-vectormaker-co.svg";
 
 interface FormData {
   user: string;
@@ -23,22 +25,29 @@ function Login() {
   return (
     <>
       <h1 className="text-3xl font-bold mb-4 text-center">Login</h1>
+
       {!selectUser && (
-        <div className="flex flex-col items-center text-center gap-4">
-          <p>Selecciona el usuario:</p>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-52 rounded"
-            onClick={() => setSelectUser("admin")}
-          >
-            Admin
-          </button>
-          <button
-            className="bg-gray-300 hover:bg-gray-500 text-black font-bold py-2 px-4 w-52 rounded"
-            onClick={() => setSelectUser("cajero")}
-          >
-            Cajero
-          </button>
-        </div>
+        <section className="flex flex-col items-center text-center gap-4">
+          <div>
+            <p className="text-xl">Selecciona el usuario:</p>
+          </div>
+          <div className="flex flex-row gap-4">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-52 rounded"
+              onClick={() => setSelectUser("admin")}
+            >
+              Admin
+              <img src={logoadmin} alt="admin logo" />
+            </button>
+            <button
+              className="bg-gray-300 hover:bg-gray-500 text-black font-bold py-2 px-4 w-52 rounded"
+              onClick={() => setSelectUser("cajero")}
+            >
+              Cajero
+              <img src={logocajero} alt="cajero logo" />
+            </button>
+          </div>
+        </section>
       )}
 
       {selectUser === "admin" && (

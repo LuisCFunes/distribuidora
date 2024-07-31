@@ -21,6 +21,8 @@ import ProveedoresForm from "./Proveedores/ProveedoresForm";
 import HomeCajero from "./HomeCajero";
 import Art_OrdenesTable from "./Art_Ordenes/Art_OrdenesTable";
 import Art_OrdenesForm from "./Art_Ordenes/Art_OrdenesForm";
+import ClientesTableCajero from "./Clientes/ClientesTableCajero";
+import ArticulosTableCajero from "./Articulos/ArticulosTableCajero";
 
 function Routes() {
   const { token } = useAuth();
@@ -41,6 +43,10 @@ function Routes() {
         {
           path: "/clientes",
           element: <ClientesTable />,
+        },
+        {
+          path: "/clientescajero",
+          element: <ClientesTableCajero />,
         },
         {
           path: "/clientes/form",
@@ -81,6 +87,10 @@ function Routes() {
         {
           path: "/articulos",
           element: <ArticulosTable />,
+        },
+        {
+          path: "/articuloscajero",
+          element: <ArticulosTableCajero   />,
         },
         {
           path: "/articulos/form",

@@ -10,8 +10,8 @@ interface TableProps {
   data: any[];
   columns: Column[];
   title: string;
-  onEdit: (item: any) => void;
-  onDelete: (item: any) => void;
+  onEdit?: (item: any) => void;
+  onDelete?: (item: any) => void;
 }
 
 function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
@@ -45,7 +45,7 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
             {columns.map((column) => (
               <th key={column.key}>{column.label}</th>
             ))}
-            <th>Acciones</th>
+            {onEdit || onDelete ? <th>Acciones</th> : null}
           </tr>
         </thead>
         <tbody>
@@ -83,18 +83,22 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
                   </>
                 ) : (
                   <>
-                    <button
-                      className="px-4 py-2 bg-green-500 text-white rounded mr-2 w-full"
-                      onClick={() => handleEdit(item)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="px-4 py-2 bg-red-500 text-white rounded w-full"
-                      onClick={() => onDelete(item)}
-                    >
-                      Eliminar
-                    </button>
+                    {onEdit && (
+                      <button
+                        className="px-4 py-2 bg-blue-500 text-white rounded mr-2 w-full"
+                        onClick={() => handleEdit(item)}
+                      >
+                        Editar
+                      </button>
+                    )}
+                    {onDelete && (
+                      <button
+                        className="px-4 py-2 bg-red-500 text-white rounded w-full"
+                        onClick={() => onDelete(item)}
+                      >
+                        Eliminar
+                      </button>
+                    )}
                   </>
                 )}
               </td>

@@ -4,20 +4,13 @@ function NavTablesCajero() {
   return (
     <div className="mt-8 w-[60vw] grid grid-cols-auto text-center gap-4 ">
       <Link
-        to="/clientes"
+        to="/clientescajero"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Ver Clientes
       </Link>
       <Link
-        to="/facturas"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Ver Facturas
-      </Link>
-
-      <Link
-        to="/articulos"
+        to="/articuloscajero"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Ver Articulos
