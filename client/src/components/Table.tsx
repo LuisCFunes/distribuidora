@@ -24,7 +24,7 @@ function Table({ data, columns, title, onEdit, onDelete }: TableProps) {
   };
 
   const handleSave = () => {
-    onEdit(editedData);
+    onEdit?.(editedData);
     setEditingItemId(null);
   };
 
